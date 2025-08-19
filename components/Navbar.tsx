@@ -1,7 +1,11 @@
-import { HouseIcon, InboxIcon, SparklesIcon, ZapIcon } from "lucide-react"
+"use client"
+
+import { Info, MapPin, Calendar, Route } from "lucide-react"
+import { useState, useEffect } from "react"
 
 import Logo from "@/registry/default/components/navbar-components/logo"
-import UserMenu from "@/registry/default/components/navbar-components/user-menu"
+import LanguageSelector from "@/registry/default/components/navbar-components/language-selector"
+import SearchBar from "@/registry/default/components/navbar-components/search-bar"
 import { Button } from "@/components/ui/button"
 import {
   NavigationMenu,
@@ -17,14 +21,33 @@ import {
 
 // Navigation links array
 const navigationLinks = [
-  { href: "#", label: "Home", icon: HouseIcon, active: true },
-  { href: "#", label: "Inbox", icon: InboxIcon },
-  { href: "#", label: "Insights", icon: ZapIcon },
+  { href: "#about", label: "About", icon: Info, active: false },
+  { href: "#destinations", label: "Destinations", icon: MapPin, active: true },
+  { href: "#events", label: "Events", icon: Calendar, active: false },
+  { href: "#plan", label: "Plan a trip", icon: Route, active: false },
 ]
 
 export default function Component() {
+  const [isScrolled, setIsScrolled] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY
+      setIsScrolled(scrollTop > 50) // Change background after scrolling 50px
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
   return (
-    <header className="border-b px-4 md:px-6">
+    <header 
+      className={`fixed top-0 left-0 right-0 z-50 px-4 md:px-6 transition-all duration-300 ease-in-out ${
+        isScrolled 
+          ? 'bg-background/90 backdrop-blur-sm shadow-sm' 
+          : ''
+      }`}
+    >
       <div className="flex h-16 items-center justify-between gap-4">
         {/* Left side */}
         <div className="flex flex-1 items-center gap-2">
@@ -72,15 +95,17 @@ export default function Component() {
                       <NavigationMenuItem key={index} className="w-full">
                         <NavigationMenuLink
                           href={link.href}
-                          className="flex-row items-center gap-2 py-1.5"
+                          className={`flex-row items-center gap-2 py-1.5 transition-colors ${
+                            isScrolled ? 'text-foreground hover:text-primary' : 'text-white hover:text-white/80'
+                          }`}
                           active={link.active}
                         >
                           <Icon
                             size={16}
-                            className="text-muted-foreground/80"
+                            className={`transition-colors ${isScrolled ? "text-muted-foreground/80" : "text-white/80"}`}
                             aria-hidden="true"
                           />
-                          <span>{link.label}</span>
+                          <span className="font-medium">{link.label}</span>
                         </NavigationMenuLink>
                       </NavigationMenuItem>
                     )
@@ -99,11 +124,15 @@ export default function Component() {
                     <NavigationMenuLink
                       active={link.active}
                       href={link.href}
-                      className="text-foreground hover:text-primary flex-row items-center gap-2 py-1.5 font-medium"
+                      className={`flex-row items-center gap-2 py-1.5 px-3 rounded-md font-medium transition-all duration-200 ${
+                        isScrolled 
+                          ? 'text-foreground hover:text-primary hover:bg-accent/50' 
+                          : 'text-white hover:text-white hover:bg-white/10'
+                      } ${link.active ? (isScrolled ? 'bg-accent/30 text-primary' : 'bg-white/15 text-white') : ''}`}
                     >
                       <Icon
                         size={16}
-                        className="text-muted-foreground/80"
+                        className={`transition-colors ${isScrolled ? "text-muted-foreground/80" : "text-white/80"}`}
                         aria-hidden="true"
                       />
                       <span>{link.label}</span>
@@ -117,24 +146,23 @@ export default function Component() {
 
         {/* Middle side: Logo */}
         <div className="flex items-center">
-          <a href="#" className="text-primary hover:text-primary/90">
+          <a href="#" className={`transition-opacity ${
+            isScrolled ? 'opacity-100' : 'opacity-90 hover:opacity-100'
+          }`}>
             <Logo />
           </a>
         </div>
 
         {/* Right side: Actions */}
-        <div className="flex flex-1 items-center justify-end gap-4">
-          {/* User menu */}
-          <UserMenu />
-          {/* Upgrade button */}
-          <Button size="sm" className="text-sm sm:aspect-square">
-            <SparklesIcon
-              className="opacity-60 sm:-ms-1"
-              size={16}
-              aria-hidden="true"
-            />
-            <span className="sm:sr-only">Upgrade</span>
-          </Button>
+        <div className="flex flex-1 items-center justify-end gap-2">
+          {/* Search bar - hidden on mobile */}
+          <div className="hidden md:flex">
+            <SearchBar isScrolled={isScrolled} />
+          </div>
+          {/* Language selector */}
+          <div className="flex items-center">
+            <LanguageSelector isScrolled={isScrolled} />
+          </div>
         </div>
       </div>
     </header>
