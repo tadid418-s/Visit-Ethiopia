@@ -44,7 +44,7 @@ export default function Component() {
     <header 
       className={`fixed top-0 left-0 right-0 z-50 px-4 md:px-6 transition-all duration-300 ease-in-out ${
         isScrolled 
-          ? 'bg-white/85 backdrop-blur-md shadow-sm' 
+          ? 'bg-white shadow-sm' 
           : ''
       }`}
     >
