@@ -1,12 +1,15 @@
+"use client"
+
 import { useState } from "react"
-import { Globe } from "lucide-react"
+import { Globe, ChevronDownIcon } from "lucide-react"
+import { Button } from "@/components/ui/button"
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 
 const languages = [
   { code: "en", name: "EN", fullName: "English", flag: "🇺🇸" },
@@ -25,27 +28,37 @@ export default function LanguageSelector({ isScrolled = false }: LanguageSelecto
   const currentLanguage = languages.find(lang => lang.code === selectedLanguage)
   
   return (
-    <Select value={selectedLanguage} onValueChange={setSelectedLanguage}>
-      <SelectTrigger className={`w-[80px] h-9 border-none bg-transparent text-sm transition-colors ${
-        isScrolled 
-          ? 'hover:bg-accent text-foreground' 
-          : 'hover:bg-white/10 text-white'
-      }`}>
-        <div className="flex items-center gap-1.5">
-          <Globe size={14} className={isScrolled ? "text-muted-foreground" : "text-white/80"} />
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button 
+          variant="ghost" 
+          className={`h-9 px-3 text-sm transition-colors border-none ${
+            isScrolled 
+              ? 'hover:bg-accent text-foreground' 
+              : 'hover:bg-white/10 text-white'
+          }`}
+        >
+          <Globe size={14} className={`mr-1.5 ${isScrolled ? "text-muted-foreground/80" : "text-white/80"}`} />
           <span className="font-medium">{currentLanguage?.name}</span>
-        </div>
-      </SelectTrigger>
-      <SelectContent>
-        {languages.map((language) => (
-          <SelectItem key={language.code} value={language.code}>
-            <div className="flex items-center gap-2">
-              <span>{language.flag}</span>
-              <span>{language.fullName}</span>
-            </div>
-          </SelectItem>
-        ))}
-      </SelectContent>
-    </Select>
+          <ChevronDownIcon
+            className={`ml-1 opacity-60 ${isScrolled ? "text-muted-foreground" : "text-white/80"}`}
+            size={14}
+            aria-hidden="true"
+          />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end" className="w-48">
+        <DropdownMenuRadioGroup value={selectedLanguage} onValueChange={setSelectedLanguage}>
+          {languages.map((language) => (
+            <DropdownMenuRadioItem key={language.code} value={language.code}>
+              <div className="flex items-center gap-2">
+                <span>{language.flag}</span>
+                <span>{language.fullName}</span>
+              </div>
+            </DropdownMenuRadioItem>
+          ))}
+        </DropdownMenuRadioGroup>
+      </DropdownMenuContent>
+    </DropdownMenu>
   )
 }
