@@ -1,5 +1,6 @@
 import About from "@/components/About";
 import Camp from "@/components/Camp";
+import FavoriteDestinations from "@/components/FavoriteDestinations";
 import Features from "@/components/Features";
 import GetApp from "@/components/GetApp";
 import Guide from "@/components/Guide";
@@ -10,6 +11,7 @@ export default function Home() {
     <>
       <Hero />
       <About />
+      <FavoriteDestinations />
       <Camp />
       <Guide />
       <Features />
