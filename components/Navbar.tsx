@@ -44,11 +44,11 @@ export default function Component() {
     <header 
       className={`fixed top-0 left-0 right-0 z-50 px-4 md:px-6 transition-all duration-300 ease-in-out ${
         isScrolled 
-          ? 'bg-background/90 backdrop-blur-sm shadow-sm' 
+          ? 'bg-white/85 backdrop-blur-md shadow-sm' 
           : ''
       }`}
     >
-      <div className="flex h-16 items-center justify-between gap-4">
+      <div className="flex h-14 items-center justify-between gap-3">
         {/* Left side */}
         <div className="flex flex-1 items-center gap-2">
           {/* Mobile menu trigger */}
@@ -95,17 +95,17 @@ export default function Component() {
                       <NavigationMenuItem key={index} className="w-full">
                         <NavigationMenuLink
                           href={link.href}
-                          className={`flex-row items-center gap-2 py-1.5 transition-colors ${
+                          className={`flex-row items-center gap-1.5 py-1 text-sm transition-colors ${
                             isScrolled ? 'text-foreground hover:text-primary' : 'text-white hover:text-white/80'
                           }`}
                           active={link.active}
                         >
                           <Icon
-                            size={16}
+                            size={14}
                             className={`transition-colors ${isScrolled ? "text-muted-foreground/80" : "text-white/80"}`}
                             aria-hidden="true"
                           />
-                          <span className="font-medium">{link.label}</span>
+                          <span>{link.label}</span>
                         </NavigationMenuLink>
                       </NavigationMenuItem>
                     )
@@ -124,14 +124,14 @@ export default function Component() {
                     <NavigationMenuLink
                       active={link.active}
                       href={link.href}
-                      className={`flex-row items-center gap-2 py-1.5 px-3 rounded-md font-medium transition-all duration-200 ${
+                      className={`flex-row items-center gap-1.5 py-1 px-2 rounded-md text-sm transition-all duration-200 ${
                         isScrolled 
                           ? 'text-foreground hover:text-primary hover:bg-accent/50' 
                           : 'text-white hover:text-white hover:bg-white/10'
                       } ${link.active ? (isScrolled ? 'bg-accent/30 text-primary' : 'bg-white/15 text-white') : ''}`}
                     >
                       <Icon
-                        size={16}
+                        size={14}
                         className={`transition-colors ${isScrolled ? "text-muted-foreground/80" : "text-white/80"}`}
                         aria-hidden="true"
                       />

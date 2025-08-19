@@ -42,24 +42,24 @@ export default function SearchBar({ isScrolled = false }: SearchBarProps) {
   return (
     <>
       <button
-        className={`inline-flex h-9 w-fit rounded-full border px-3 py-2 text-sm shadow-xs transition-all duration-200 outline-none ${
+        className={`inline-flex h-8 w-fit rounded-full border px-2.5 py-1.5 text-xs shadow-xs transition-all duration-200 outline-none ${
           isScrolled 
             ? 'border-border/30 bg-background/70 text-foreground hover:bg-background/90 focus-visible:ring-ring/50 focus-visible:border-ring focus-visible:ring-[3px]' 
             : 'border-white/20 bg-white/15 text-white hover:bg-white/20 focus-visible:ring-white/30 focus-visible:border-white/30 focus-visible:ring-[3px] backdrop-blur-sm'
         }`}
         onClick={() => setOpen(true)}
       >
-        <span className="flex grow items-center">
+        <span className="flex items-center">
           <SearchIcon
-            className={`-ms-1 me-3 ${isScrolled ? 'text-muted-foreground/80' : 'text-white/80'}`}
-            size={16}
+            className={`-ms-0.5 me-2 ${isScrolled ? 'text-muted-foreground/80' : 'text-white/80'}`}
+            size={14}
             aria-hidden="true"
           />
           <span className={`font-normal ${isScrolled ? 'text-muted-foreground/70' : 'text-white/70'}`}>
-            Search destinations...
+            Search
           </span>
         </span>
-        <kbd className={`ms-8 -me-1 inline-flex h-5 max-h-full items-center rounded border px-1 font-[inherit] text-[0.625rem] font-medium ${
+        <kbd className={`ms-3 -me-0.5 inline-flex h-4 max-h-full items-center rounded border px-1 font-[inherit] text-[0.55rem] font-medium ${
           isScrolled 
             ? 'bg-background text-muted-foreground/70' 
             : 'bg-white/20 text-white/70'
