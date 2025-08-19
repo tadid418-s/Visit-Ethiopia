@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import './globals.css'
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { amhara } from './fonts';
 
 export const metadata: Metadata = {
   title: 'Travel UI/UX for Camping | Next.js Web Application',
@@ -43,7 +44,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
+      <body className={`${amhara.variable}`}>
         <Navbar />
         <main className="relative overflow-hidden">
           {children}

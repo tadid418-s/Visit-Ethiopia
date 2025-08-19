@@ -3,7 +3,7 @@
 import { Info, MapPin, Calendar, Route } from "lucide-react"
 import { useState, useEffect } from "react"
 
-import Logo from "@/registry/default/components/navbar-components/logo"
+import Logo from "@/components/Logo"
 import LanguageSelector from "@/registry/default/components/navbar-components/language-selector"
 import SearchBar from "@/registry/default/components/navbar-components/search-bar"
 import { Button } from "@/components/ui/button"
@@ -54,7 +54,7 @@ export default function Component() {
           {/* Mobile menu trigger */}
           <Popover>
             <PopoverTrigger asChild>
-              <Button
+        <Button 
                 className="group size-8 md:hidden"
                 variant="ghost"
                 size="icon"
@@ -146,12 +146,10 @@ export default function Component() {
 
         {/* Middle side: Logo */}
         <div className="flex items-center">
-          <a href="#" className={`transition-opacity ${
-            isScrolled ? 'opacity-100' : 'opacity-90 hover:opacity-100'
-          }`}>
-            <Logo />
+          <a href="#" className="transition-opacity hover:opacity-90">
+            <Logo isScrolled={isScrolled} />
           </a>
-        </div>
+      </div>
 
         {/* Right side: Actions */}
         <div className="flex flex-1 items-center justify-end gap-2">
