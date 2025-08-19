@@ -1,6 +1,6 @@
 "use client"
 
-import { Info, MapPin, Calendar, Route } from "lucide-react"
+import { Map, MapPin, Calendar, Route } from "lucide-react"
 import { useState, useEffect } from "react"
 
 import Logo from "@/components/Logo"
@@ -21,8 +21,8 @@ import {
 
 // Navigation links array
 const navigationLinks = [
-  { href: "#about", label: "About", icon: Info, active: false },
-  { href: "#destinations", label: "Destinations", icon: MapPin, active: true },
+  { href: "#about", label: "About", icon: Map, active: false },
+  { href: "#destinations", label: "Destinations", icon: MapPin, active: false },
   { href: "#events", label: "Events", icon: Calendar, active: false },
   { href: "#plan", label: "Plan a trip", icon: Route, active: false },
 ]
@@ -99,6 +99,10 @@ export default function Component() {
                             isScrolled ? 'text-foreground hover:text-primary' : 'text-white hover:text-white/80'
                           }`}
                           active={link.active}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            document.querySelector(link.href)?.scrollIntoView({ behavior: 'smooth' });
+                          }}
                         >
                           <Icon
                             size={14}
@@ -129,6 +133,10 @@ export default function Component() {
                           ? 'text-foreground hover:text-primary hover:bg-accent/50' 
                           : 'text-white hover:text-white hover:bg-white/10'
                       } ${link.active ? (isScrolled ? 'bg-accent/30 text-primary' : 'bg-white/15 text-white') : ''}`}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        document.querySelector(link.href)?.scrollIntoView({ behavior: 'smooth' });
+                      }}
                     >
                       <Icon
                         size={14}
