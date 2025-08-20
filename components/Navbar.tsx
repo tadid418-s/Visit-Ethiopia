@@ -95,14 +95,14 @@ export default function Component() {
             </PopoverTrigger>
             <PopoverContent align="start" className="w-36 p-1 md:hidden bg-white border-gray-200 shadow-lg">
               <NavigationMenu className="max-w-none *:w-full">
-                <NavigationMenuList className="flex-col items-start gap-0 md:gap-2">
+                <NavigationMenuList className="flex-col items-start gap-0 md:gap-2 w-full">
                   {navigationLinks.map((link, index) => {
                     const Icon = link.icon
                     return (
                       <NavigationMenuItem key={index} className="w-full">
                         <NavigationMenuLink
                           href={link.href}
-                          className="flex-row items-center gap-1.5 py-1 text-sm transition-colors text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded px-2 w-full"
+                          className="flex-row items-center gap-1.5 py-1 text-sm transition-colors text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded px-2 w-full text-left"
                           active={link.active}
                           onClick={(e) => {
                             e.preventDefault();
@@ -125,7 +125,7 @@ export default function Component() {
                     <Popover>
                       <PopoverTrigger asChild>
                         <NavigationMenuLink
-                          className="flex-row items-center gap-1.5 py-1 text-sm transition-colors cursor-pointer w-full text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded px-2"
+                          className="flex-row items-center gap-1.5 py-1 text-sm transition-colors cursor-pointer w-full text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded px-2 text-left"
                         >
                           <Compass
                             size={14}
@@ -142,7 +142,7 @@ export default function Component() {
                             return (
                               <button
                                 key={index}
-                                className="flex items-center gap-2 w-full px-3 py-2 text-sm text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors"
+                                className="flex items-center gap-2 w-full px-3 py-2 text-sm text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors text-left"
                                 onClick={(e) => {
                                   e.preventDefault();
                                   document.querySelector(option.href)?.scrollIntoView({ behavior: 'smooth' });
@@ -161,7 +161,7 @@ export default function Component() {
                   {/* Search Button for Mobile */}
                   <NavigationMenuItem className="w-full">
                     <NavigationMenuLink
-                      className="flex-row items-center gap-1.5 py-1 text-sm transition-colors cursor-pointer w-full text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded px-2"
+                      className="flex-row items-center gap-1.5 py-1 text-sm transition-colors cursor-pointer w-full text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded px-2 text-left"
                       onClick={() => {
                         // Open search dialog
                         const searchButton = document.querySelector('[data-search-trigger]') as HTMLButtonElement;
@@ -182,11 +182,6 @@ export default function Component() {
               </NavigationMenu>
             </PopoverContent>
           </Popover>
-
-          {/* Mobile search button */}
-          <div className="md:hidden">
-            <SearchBar isScrolled={isScrolled} />
-          </div>
 
           <NavigationMenu className="max-md:hidden">
             <NavigationMenuList className="gap-2">
