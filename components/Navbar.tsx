@@ -1,6 +1,6 @@
 "use client"
 
-import { Map, MapPin, Calendar, Route, Newspaper, Megaphone, FileText } from "lucide-react"
+import { Map, MapPin, Compass, Route, Newspaper, Megaphone, FileText, Calendar, SearchIcon } from "lucide-react"
 import { useState, useEffect } from "react"
 
 import Logo from "@/components/Logo"
@@ -93,7 +93,7 @@ export default function Component() {
                 </svg>
               </Button>
             </PopoverTrigger>
-            <PopoverContent align="start" className="w-36 p-1 md:hidden">
+            <PopoverContent align="start" className="w-36 p-1 md:hidden bg-white border-gray-200 shadow-lg">
               <NavigationMenu className="max-w-none *:w-full">
                 <NavigationMenuList className="flex-col items-start gap-0 md:gap-2">
                   {navigationLinks.map((link, index) => {
@@ -102,9 +102,7 @@ export default function Component() {
                       <NavigationMenuItem key={index} className="w-full">
                         <NavigationMenuLink
                           href={link.href}
-                          className={`flex-row items-center gap-1.5 py-1 text-sm transition-colors ${
-                            isScrolled ? 'text-foreground hover:text-primary' : 'text-white hover:text-white/80'
-                          }`}
+                          className="flex-row items-center gap-1.5 py-1 text-sm transition-colors text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded px-2 w-full"
                           active={link.active}
                           onClick={(e) => {
                             e.preventDefault();
@@ -113,7 +111,7 @@ export default function Component() {
                         >
                           <Icon
                             size={14}
-                            className={`transition-colors ${isScrolled ? "text-muted-foreground/80" : "text-white/80"}`}
+                            className="transition-colors text-gray-500"
                             aria-hidden="true"
                           />
                           <span>{link.label}</span>
@@ -127,25 +125,14 @@ export default function Component() {
                     <Popover>
                       <PopoverTrigger asChild>
                         <NavigationMenuLink
-                          className={`flex-row items-center gap-1.5 py-1 text-sm transition-colors cursor-pointer w-full ${
-                            isScrolled ? 'text-foreground hover:text-primary' : 'text-white hover:text-white/80'
-                          }`}
+                          className="flex-row items-center gap-1.5 py-1 text-sm transition-colors cursor-pointer w-full text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded px-2"
                         >
-                          <Calendar
+                          <Compass
                             size={14}
-                            className={`transition-colors ${isScrolled ? "text-muted-foreground/80" : "text-white/80"}`}
+                            className="transition-colors text-gray-500"
                             aria-hidden="true"
                           />
-                          <span>Events</span>
-                          <svg
-                            className="w-3 h-3 ml-1 opacity-70"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                          >
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                          </svg>
+                          <span>Discover</span>
                         </NavigationMenuLink>
                       </PopoverTrigger>
                       <PopoverContent align="end" className="w-48 p-2 bg-white border-gray-200 shadow-lg">
@@ -155,7 +142,7 @@ export default function Component() {
                             return (
                               <button
                                 key={index}
-                                className="flex items-center gap-2 w-full px-3 py-2 text-sm text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors focus:outline-none"
+                                className="flex items-center gap-2 w-full px-3 py-2 text-sm text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors"
                                 onClick={(e) => {
                                   e.preventDefault();
                                   document.querySelector(option.href)?.scrollIntoView({ behavior: 'smooth' });
@@ -170,10 +157,36 @@ export default function Component() {
                       </PopoverContent>
                     </Popover>
                   </NavigationMenuItem>
+
+                  {/* Search Button for Mobile */}
+                  <NavigationMenuItem className="w-full">
+                    <NavigationMenuLink
+                      className="flex-row items-center gap-1.5 py-1 text-sm transition-colors cursor-pointer w-full text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded px-2"
+                      onClick={() => {
+                        // Open search dialog
+                        const searchButton = document.querySelector('[data-search-trigger]') as HTMLButtonElement;
+                        if (searchButton) {
+                          searchButton.click();
+                        }
+                      }}
+                    >
+                      <SearchIcon
+                        size={14}
+                        className="transition-colors text-gray-500"
+                        aria-hidden="true"
+                      />
+                      <span>Search</span>
+                    </NavigationMenuLink>
+                  </NavigationMenuItem>
                 </NavigationMenuList>
               </NavigationMenu>
             </PopoverContent>
           </Popover>
+
+          {/* Mobile search button */}
+          <div className="md:hidden">
+            <SearchBar isScrolled={isScrolled} />
+          </div>
 
           <NavigationMenu className="max-md:hidden">
             <NavigationMenuList className="gap-2">
@@ -216,12 +229,12 @@ export default function Component() {
                           : 'text-white hover:text-white hover:bg-white/10'
                       }`}
                     >
-                      <Calendar
+                      <Compass
                         size={14}
                         className={`transition-colors ${isScrolled ? "text-muted-foreground/80" : "text-white/80"}`}
                         aria-hidden="true"
                       />
-                      <span>Events</span>
+                      <span>Discover</span>
                       <svg
                         className="w-3 h-3 ml-1 opacity-70"
                         fill="none"

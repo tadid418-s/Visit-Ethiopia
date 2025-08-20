@@ -48,6 +48,7 @@ export default function SearchBar({ isScrolled = false }: SearchBarProps) {
             : 'border-white/20 bg-white/15 text-white hover:bg-white/20 focus-visible:ring-white/30 focus-visible:border-white/30 focus-visible:ring-[3px] backdrop-blur-sm'
         }`}
         onClick={() => setOpen(true)}
+        data-search-trigger
       >
         <span className="flex items-center gap-2">
           <SearchIcon
