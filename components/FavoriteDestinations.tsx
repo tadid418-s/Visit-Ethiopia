@@ -1,9 +1,11 @@
 'use client';
 
+import React from 'react';
 import Image from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import { Button } from '@/components/ui/button';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 
@@ -39,9 +41,43 @@ const destinations: Destination[] = [
     description: 'Dramatic mountain landscapes and wildlife',
     region: 'Amhara Region',
   },
+  {
+    name: 'Bale Mountains',
+    image: '/simien.jpg',
+    description: 'Highland wilderness and endemic wildlife',
+    region: 'Oromia Region',
+  },
 ];
 
 export default function FavoriteDestinations() {
+  const swiperRef = React.useRef<any>(null);
+
+  const goNext = () => {
+    if (swiperRef.current && swiperRef.current.swiper) {
+      swiperRef.current.swiper.slideNext();
+    }
+  };
+
+  const goPrev = () => {
+    if (swiperRef.current && swiperRef.current.swiper) {
+      swiperRef.current.swiper.slidePrev();
+    }
+  };
+
+  // Add keyboard navigation
+  React.useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'ArrowLeft') {
+        goPrev();
+      } else if (event.key === 'ArrowRight') {
+        goNext();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   return (
     <section id="destinations" className="py-12 bg-gray-100 min-h-screen flex items-center">
       <div className="max-w-7xl mx-auto px-4 text-left pt-20">
@@ -66,9 +102,16 @@ export default function FavoriteDestinations() {
         </div>
         <div className="relative">
           <Swiper
+            ref={swiperRef}
             slidesPerView={4}
             spaceBetween={20}
-            navigation={true}
+            navigation={false}
+            loop={true}
+            grabCursor={true}
+            touchRatio={1}
+            touchAngle={45}
+            resistance={true}
+            resistanceRatio={0.85}
             modules={[Navigation]}
             className="mySwiper"
             breakpoints={{
@@ -127,9 +170,25 @@ export default function FavoriteDestinations() {
                </SwiperSlide>
              ))}
           </Swiper>
-          {/* Gradient overlays for fade effect on sides */}
-          <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
-          <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
+          {/* Custom Navigation Arrows */}
+          <button 
+            onClick={goPrev}
+            aria-label="Previous destination"
+            className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 bg-white/80 hover:bg-white rounded-full shadow-lg flex items-center justify-center transition-all duration-200 hover:scale-110 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+          >
+            <ChevronLeft className="w-5 h-5 md:w-6 md:h-6 text-gray-700" />
+          </button>
+          <button 
+            onClick={goNext}
+            aria-label="Next destination"
+            className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 bg-white/80 hover:bg-white rounded-full shadow-lg flex items-center justify-center transition-all duration-200 hover:scale-110 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+          >
+            <ChevronRight className="w-5 h-5 md:w-6 md:h-6 text-gray-700" />
+          </button>
+          
+          {/* Gradient overlays for fade effect on sides - matching background color */}
+          <div className="absolute inset-y-0 left-0 w-8 md:w-16 bg-gradient-to-r from-gray-100 to-transparent z-10 pointer-events-none"></div>
+          <div className="absolute inset-y-0 right-0 w-8 md:w-16 bg-gradient-to-l from-gray-100 to-transparent z-10 pointer-events-none"></div>
         </div>
       </div>
     </section>
