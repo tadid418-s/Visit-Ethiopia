@@ -5,7 +5,7 @@ import React from 'react'
 
 const Footer = () => {
   return (
-    <footer className="bg-white mt-16">
+    <footer className="bg-white mt-16 rounded-t-3xl shadow-xl">
       <div className="max-w-6xl mx-auto px-6 py-16">
         <div className="flex flex-col lg:flex-row justify-between gap-12">
           {/* Logo and Description */}
@@ -81,7 +81,7 @@ const Footer = () => {
               Privacy Policy
             </Link>
             <Link 
-              href="https://github.com/tadid418" 
+              href="https://github.com/tadid418-s" 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-gray-500 hover:text-gray-700 text-sm transition-colors underline"

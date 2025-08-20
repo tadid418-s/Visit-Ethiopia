@@ -1,6 +1,6 @@
 "use client"
 
-import { Map, MapPin, Calendar, Route } from "lucide-react"
+import { Map, MapPin, Calendar, Route, Newspaper, Megaphone, FileText } from "lucide-react"
 import { useState, useEffect } from "react"
 
 import Logo from "@/components/Logo"
@@ -23,8 +23,15 @@ import {
 const navigationLinks = [
   { href: "#about", label: "About", icon: Map, active: false },
   { href: "#destinations", label: "Destinations", icon: MapPin, active: false },
-  { href: "#events", label: "Events", icon: Calendar, active: false },
   { href: "#plan", label: "Plan a trip", icon: Route, active: false },
+]
+
+// Events popover options
+const eventsOptions = [
+  { href: "#upcoming-events", label: "Upcoming Events", icon: Calendar },
+  { href: "#blogs", label: "Blogs", icon: FileText },
+  { href: "#news", label: "News", icon: Newspaper },
+  { href: "#announcements", label: "Announcements", icon: Megaphone },
 ]
 
 export default function Component() {
@@ -114,6 +121,55 @@ export default function Component() {
                       </NavigationMenuItem>
                     )
                   })}
+                  
+                  {/* Events Popover for Mobile */}
+                  <NavigationMenuItem className="w-full">
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <NavigationMenuLink
+                          className={`flex-row items-center gap-1.5 py-1 text-sm transition-colors cursor-pointer w-full ${
+                            isScrolled ? 'text-foreground hover:text-primary' : 'text-white hover:text-white/80'
+                          }`}
+                        >
+                          <Calendar
+                            size={14}
+                            className={`transition-colors ${isScrolled ? "text-muted-foreground/80" : "text-white/80"}`}
+                            aria-hidden="true"
+                          />
+                          <span>Events</span>
+                          <svg
+                            className="w-3 h-3 ml-1 opacity-70"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                          >
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                          </svg>
+                        </NavigationMenuLink>
+                      </PopoverTrigger>
+                      <PopoverContent align="end" className="w-48 p-2 bg-white border-gray-200 shadow-lg">
+                        <div className="space-y-1">
+                          {eventsOptions.map((option, index) => {
+                            const Icon = option.icon
+                            return (
+                              <button
+                                key={index}
+                                className="flex items-center gap-2 w-full px-3 py-2 text-sm text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors focus:outline-none"
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  document.querySelector(option.href)?.scrollIntoView({ behavior: 'smooth' });
+                                }}
+                              >
+                                <Icon size={14} className="text-gray-500" />
+                                <span>{option.label}</span>
+                              </button>
+                            )
+                          })}
+                        </div>
+                      </PopoverContent>
+                    </Popover>
+                  </NavigationMenuItem>
                 </NavigationMenuList>
               </NavigationMenu>
             </PopoverContent>
@@ -148,6 +204,57 @@ export default function Component() {
                   </NavigationMenuItem>
                 )
               })}
+              
+              {/* Events Popover */}
+              <NavigationMenuItem>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <NavigationMenuLink
+                      className={`flex-row items-center gap-1.5 py-1 px-2 rounded-md text-sm transition-all duration-200 cursor-pointer ${
+                        isScrolled 
+                          ? 'text-foreground hover:text-primary hover:bg-accent/50' 
+                          : 'text-white hover:text-white hover:bg-white/10'
+                      }`}
+                    >
+                      <Calendar
+                        size={14}
+                        className={`transition-colors ${isScrolled ? "text-muted-foreground/80" : "text-white/80"}`}
+                        aria-hidden="true"
+                      />
+                      <span>Events</span>
+                      <svg
+                        className="w-3 h-3 ml-1 opacity-70"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </NavigationMenuLink>
+                  </PopoverTrigger>
+                  <PopoverContent align="end" className="w-48 p-2 bg-white border-gray-200 shadow-lg">
+                    <div className="space-y-1">
+                      {eventsOptions.map((option, index) => {
+                        const Icon = option.icon
+                        return (
+                          <button
+                            key={index}
+                            className="flex items-center gap-2 w-full px-3 py-2 text-sm text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors focus:outline-none"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              document.querySelector(option.href)?.scrollIntoView({ behavior: 'smooth' });
+                            }}
+                          >
+                            <Icon size={14} className="text-gray-500" />
+                            <span>{option.label}</span>
+                          </button>
+                        )
+                      })}
+                    </div>
+                  </PopoverContent>
+                </Popover>
+              </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
         </div>
