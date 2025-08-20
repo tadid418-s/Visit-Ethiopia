@@ -5,106 +5,93 @@ import React from 'react'
 
 const Footer = () => {
   return (
-    <footer className="bg-white rounded-t-3xl shadow-xl mt-12">
-      <div className="max-w-7xl mx-auto px-6 py-12 flex flex-wrap justify-between gap-8">
-        {/* Company Logo and Description */}
-        <div className="flex-1 min-w-[200px]">
-          <div className="flex items-center mb-4">
-            <h1 className={`${amhara.variable} text-2xl font-bold text-gray-900`} style={{ fontFamily: "var(--font-amhara)" }}>
-              <span className="text-gray-900">Visit </span>
-              <span className="text-green-600">E</span>
-              <span className="text-yellow-500">t</span>
-              <span className="text-red-600">hiopia</span>
-            </h1>
-          </div>
-          <p className="text-sm text-gray-600">{COMPANY_DESCRIPTION}</p>
-        </div>
-
-        {/* Company Links */}
-        <div className="flex-1 min-w-[150px]">
-          <FooterColumn title="Company">
-            <ul className="space-y-3 text-sm">
-              {FOOTER_LINKS[0].links.map((link, linkIdx) => (
-                <li key={link + '-' + linkIdx}>
-                  <Link href="/" className="text-gray-600 hover:text-gray-900 flex items-center transition-colors group">
-                    {link} 
-                    {link === 'Become an Affiliate' || link === 'Projects' ? (
-                      <span className="ml-1 text-gray-400 group-hover:text-gray-600 transition-colors">↗</span>
-                    ) : (
-                      <span className="ml-1">→</span>
-                    )}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </FooterColumn>
-        </div>
-
-        {/* Socials */}
-        <div className="flex-1 min-w-[150px]">
-          <FooterColumn title="Socials">
-            <ul className="space-y-3 text-sm">
-              {FOOTER_LINKS[1].links.map((link, linkIdx) => (
-                <li key={link + '-' + linkIdx}>
-                  <Link href="/" className="text-gray-600 hover:text-gray-900 flex items-center transition-colors group">
-                    {link} <span className="ml-1 text-gray-400 group-hover:text-gray-600 transition-colors">↗</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </FooterColumn>
-        </div>
-
-        {/* Newsletter */}
-        <div className="flex-1 min-w-[250px]">
-          <FooterColumn title={NEWSLETTER.title}>
-            <p className="text-sm text-gray-600 mb-4">{NEWSLETTER.description}</p>
-            <div className="flex">
-              <input
-                type="email"
-                placeholder={NEWSLETTER.placeholder}
-                className="px-4 py-3 bg-gray-100 text-gray-800 rounded-l-full focus:outline-none flex-1 text-sm border border-gray-200"
-              />
-              <button className="bg-black text-white px-4 py-3 rounded-r-full text-sm hover:bg-gray-800 transition-colors">
-                {NEWSLETTER.buttonText}
-              </button>
+    <footer className="bg-white mt-16">
+      <div className="max-w-6xl mx-auto px-6 py-16">
+        <div className="flex flex-col lg:flex-row justify-between gap-12">
+          {/* Logo and Description */}
+          <div className="lg:max-w-sm">
+            <div className="flex items-center mb-4">
+              <div className="w-8 h-8 bg-black rounded mr-3 flex items-center justify-center">
+                <span className="text-white font-bold text-sm">VE</span>
+              </div>
+              <h1 className={`${amhara.variable} text-xl font-semibold text-gray-900`} style={{ fontFamily: "var(--font-amhara)" }}>
+                <span className="text-gray-900">Visit </span>
+                <span className="text-green-600">E</span>
+                <span className="text-yellow-500">t</span>
+                <span className="text-red-600">hiopia</span>
+              </h1>
             </div>
-          </FooterColumn>
-        </div>
-      </div>
+            <p className="text-gray-600 text-sm leading-relaxed">
+              Visit Ethiopia helps travelers discover the cradle of humanity's rich heritage, 
+              breathtaking landscapes, and vibrant culture — everything you need in one place.
+            </p>
+          </div>
 
-      {/* Copyright */}
-      <div className="border-t border-gray-200">
-        <div className="max-w-7xl mx-auto px-6 py-6 flex justify-between items-center text-sm text-gray-500">
-          <p>© 2025 Visit Ethiopia · All rights reserved · Made with Visit Ethiopia</p>
-          <div className="flex items-center gap-2">
-            <span>Built by </span>
+          {/* Navigation Columns */}
+          <div className="flex flex-col sm:flex-row gap-12 lg:gap-16">
+            {/* Destinations */}
+            <div>
+              <h4 className="font-medium text-gray-900 mb-6">Destinations</h4>
+              <ul className="space-y-4">
+                <li><a href="#" className="text-gray-600 hover:text-gray-900 text-sm transition-colors">Lalibela</a></li>
+                <li><a href="#" className="text-gray-600 hover:text-gray-900 text-sm transition-colors">Axum</a></li>
+                <li><a href="#" className="text-gray-600 hover:text-gray-900 text-sm transition-colors">Simien Mountains</a></li>
+                <li><a href="#" className="text-gray-600 hover:text-gray-900 text-sm transition-colors">Danakil Depression</a></li>
+              </ul>
+            </div>
+
+            {/* Resources */}
+            <div>
+              <h4 className="font-medium text-gray-900 mb-6">Resources</h4>
+              <ul className="space-y-4">
+                <li><a href="#" className="text-gray-600 hover:text-gray-900 text-sm transition-colors">Travel Guide</a></li>
+                <li><a href="#" className="text-gray-600 hover:text-gray-900 text-sm transition-colors">Culture & History</a></li>
+                <li><a href="#" className="text-gray-600 hover:text-gray-900 text-sm transition-colors">Visa Info</a></li>
+                <li><a href="#" className="text-gray-600 hover:text-gray-900 text-sm transition-colors">Safety Tips</a></li>
+              </ul>
+            </div>
+
+            {/* Company */}
+            <div>
+              <h4 className="font-medium text-gray-900 mb-6">Company</h4>
+              <ul className="space-y-4">
+                <li><a href="#" className="text-gray-600 hover:text-gray-900 text-sm transition-colors">About</a></li>
+                <li><a href="#" className="text-gray-600 hover:text-gray-900 text-sm transition-colors">Contact</a></li>
+                <li><a href="#" className="text-gray-600 hover:text-gray-900 text-sm transition-colors">Partners</a></li>
+                <li><a href="#" className="text-gray-600 hover:text-gray-900 text-sm transition-colors">Careers</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Section */}
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center pt-12 mt-12 border-t border-gray-200 gap-4">
+          <p className="text-gray-500 text-sm">© 2025 Visit Ethiopia. All rights reserved</p>
+          <div className="flex gap-6">
+            <Link 
+              href="/terms" 
+              className="text-gray-500 hover:text-gray-700 text-sm transition-colors"
+            >
+              Terms of Service
+            </Link>
+            <Link 
+              href="/privacy" 
+              className="text-gray-500 hover:text-gray-700 text-sm transition-colors"
+            >
+              Privacy Policy
+            </Link>
             <Link 
               href="https://github.com/tadid418" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="underline hover:text-gray-700 transition-colors"
+              className="text-gray-500 hover:text-gray-700 text-sm transition-colors underline"
             >
-              Tadiyos
+              Built by Tadiyos
             </Link>
           </div>
         </div>
       </div>
     </footer>
-  )
-}
-
-type FooterColumnProps = {
-  title: string;
-  children: React.ReactNode;
-}
-
-const FooterColumn = ({ title, children }: FooterColumnProps) => {
-  return (
-    <div className="flex flex-col gap-5">
-      <h4 className="font-semibold text-gray-900 mb-4">{title}</h4>
-      {children}
-    </div>
   )
 }
 
