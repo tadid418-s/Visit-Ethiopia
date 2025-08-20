@@ -4,6 +4,15 @@ import React, { useState } from 'react';
 
 const CTA = () => {
   const [activeTab, setActiveTab] = useState('tours');
+  const [selectedField1, setSelectedField1] = useState('');
+  const [selectedField3, setSelectedField3] = useState('');
+
+  // Reset function to clear selections when tab changes
+  const handleTabChange = (newTab: string) => {
+    setActiveTab(newTab);
+    setSelectedField1('');
+    setSelectedField3('');
+  };
 
   const formContent = {
     tours: {
@@ -118,7 +127,7 @@ const CTA = () => {
               {/* Tabs for different booking types */}
               <div className="flex flex-wrap gap-2 sm:gap-3 text-sm font-semibold mb-4">
                 <button 
-                  onClick={() => setActiveTab('tours')}
+                  onClick={() => handleTabChange('tours')}
                   className={`px-3 py-2 sm:px-4 rounded-full transition-colors duration-200 ${
                     activeTab === 'tours' ? 'bg-white/20 text-white' : 'text-white/70 hover:text-white hover:bg-white/10'
                   }`}
@@ -126,7 +135,7 @@ const CTA = () => {
                   Tours
                 </button>
                 <button 
-                  onClick={() => setActiveTab('heritage')}
+                  onClick={() => handleTabChange('heritage')}
                   className={`px-3 py-2 sm:px-4 rounded-full transition-colors duration-200 ${
                     activeTab === 'heritage' ? 'bg-white/20 text-white' : 'text-white/70 hover:text-white hover:bg-white/10'
                   }`}
@@ -134,7 +143,7 @@ const CTA = () => {
                   Heritage Sites
                 </button>
                 <button 
-                  onClick={() => setActiveTab('culture')}
+                  onClick={() => handleTabChange('culture')}
                   className={`px-3 py-2 sm:px-4 rounded-full transition-colors duration-200 ${
                     activeTab === 'culture' ? 'bg-white/20 text-white' : 'text-white/70 hover:text-white hover:bg-white/10'
                   }`}
@@ -142,7 +151,7 @@ const CTA = () => {
                   Culture
                 </button>
                 <button 
-                  onClick={() => setActiveTab('adventure')}
+                  onClick={() => handleTabChange('adventure')}
                   className={`px-3 py-2 sm:px-4 rounded-full transition-colors duration-200 ${
                     activeTab === 'adventure' ? 'bg-white/20 text-white' : 'text-white/70 hover:text-white hover:bg-white/10'
                   }`}
@@ -175,31 +184,16 @@ const CTA = () => {
                 {/* Second Field */}
                 <div className="relative">
                   <label htmlFor="field2" className="block text-white/80 text-xs sm:text-sm mb-1 font-medium">{currentContent.fields.second.label}</label>
-                  {currentContent.fields.second.type === 'date' ? (
-                    <input
-                      type="date"
-                      id="field2"
-                      defaultValue="2025-03-01"
-                      className="w-full bg-gray-800 text-white rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-red-500 pr-8 transition-colors duration-200 border border-gray-700"
-                    />
-                  ) : (
-                    <select
-                      id="field2"
-                      className="w-full bg-gray-800 text-white rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-red-500 appearance-none pr-8 transition-colors duration-200 border border-gray-700"
-                    >
-                      {currentContent.fields.second.options?.map((option, index) => (
-                        <option key={index} value={option}>{option}</option>
-                      ))}
-                    </select>
-                  )}
-                  {/* Calendar or Chevron icon */}
+                  <input
+                    type="date"
+                    id="field2"
+                    defaultValue="2025-03-01"
+                    className="w-full bg-gray-800 text-white rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-red-500 pr-8 transition-colors duration-200 border border-gray-700"
+                  />
+                  {/* Calendar icon */}
                   <div className="pointer-events-none absolute inset-y-0 right-0 top-6 flex items-center px-2 text-white/70">
                     <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      {currentContent.fields.second.type === 'date' ? (
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21l14-9-6 6-8 3z" />
-                      ) : (
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                      )}
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21l14-9-6 6-8 3z" />
                     </svg>
                   </div>
                 </div>
