@@ -2,6 +2,26 @@
   "name": "visit-ethiopia",
   "version": "0.1.0",
   "private": true,
+  "description": "Official Visit Ethiopia tourism website showcasing Ethiopia's cultural heritage, UNESCO World Heritage sites, and natural wonders",
+  "keywords": [
+    "ethiopia",
+    "tourism",
+    "travel",
+    "lalibela",
+    "axum",
+    "simien-mountains",
+    "unesco-heritage",
+    "ethiopian-culture",
+    "africa-travel",
+    "cultural-heritage"
+  ],
+  "author": "Visit Ethiopia Tourism Board",
+  "license": "MIT",
+  "homepage": "https://visit-ethiopia.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/visit-ethiopia/website"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
