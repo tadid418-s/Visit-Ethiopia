@@ -6,13 +6,13 @@ import Footer from '@/components/Footer';
 import { amhara } from './fonts';
 
 export const metadata: Metadata = {
-  title: 'Travel UI/UX for Camping | Next.js Web Application',
-  description: 'A modern, responsive, and feature-rich travel and camping web application built with Next.js, React, and Tailwind CSS. Explore camping destinations, features, and guides with a beautiful UI/UX.',
+  title: 'Visit Ethiopia - Discover Ancient Wonders & Natural Beauty',
+  description: 'Explore Ethiopia\'s rich cultural heritage, UNESCO World Heritage sites, stunning landscapes, and authentic experiences. From the rock-hewn churches of Lalibela to the Danakil Depression, discover the cradle of humanity.',
   authors: [
-    { name: 'Arnob Mahmud', url: 'https://arnob-mahmud.vercel.app/' }
+    { name: 'Visit Ethiopia', url: 'https://visit-ethiopia.com/' }
   ],
   keywords: [
-    'Next.js', 'React', 'Tailwind CSS', 'UI/UX', 'Camping', 'Travel App', 'TypeScript', 'Responsive Design', 'Component Reuse', 'Modern Web', 'App Router', 'Static Assets', 'Open Source', 'Learning Project', 'Arnob Mahmud'
+    'Ethiopia', 'Travel', 'Tourism', 'Lalibela', 'Axum', 'Simien Mountains', 'Danakil Depression', 'UNESCO World Heritage', 'Ethiopian Culture', 'Addis Ababa', 'Historical Sites', 'Natural Wonders', 'African Tourism', 'Cultural Heritage', 'Rock Churches'
   ],
   icons: {
     icon: '/favicon.ico',
@@ -20,16 +20,16 @@ export const metadata: Metadata = {
     apple: '/favicon.ico',
   },
   openGraph: {
-    title: 'Travel UI/UX for Camping | Next.js Web Application',
-    description: 'A modern, responsive, and feature-rich travel and camping web application built with Next.js, React, and Tailwind CSS. Explore camping destinations, features, and guides with a beautiful UI/UX.',
-    url: 'https://arnob-mahmud.vercel.app/',
-    siteName: 'Travel UI/UX for Camping',
+    title: 'Visit Ethiopia - Discover Ancient Wonders & Natural Beauty',
+    description: 'Explore Ethiopia\'s rich cultural heritage, UNESCO World Heritage sites, stunning landscapes, and authentic experiences. From the rock-hewn churches of Lalibela to the Danakil Depression, discover the cradle of humanity.',
+    url: 'https://visit-ethiopia.com/',
+    siteName: 'Visit Ethiopia',
     images: [
       {
-        url: '/hero.png',
+        url: '/lalibela.jpg',
         width: 1200,
         height: 630,
-        alt: 'Travel UI/UX for Camping Hero Image',
+        alt: 'Rock-hewn churches of Lalibela, Ethiopia',
       },
     ],
     locale: 'en_US',
