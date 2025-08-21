@@ -52,6 +52,27 @@ const destinations: Destination[] = [
 
 export default function FavoriteDestinations() {
   const swiperRef = React.useRef<any>(null);
+  const scrollRef = React.useRef<HTMLDivElement>(null);
+  const [showScrollCue, setShowScrollCue] = React.useState(true);
+  const [moveCount, setMoveCount] = React.useState(0);
+
+  // Stop animation after 5 moves
+  React.useEffect(() => {
+    if (!showScrollCue) return;
+    if (moveCount >= 5) {
+      setShowScrollCue(false);
+      return;
+    }
+    const timer = setTimeout(() => {
+      setMoveCount((c) => c + 1);
+    }, 1200); // match animation duration
+    return () => clearTimeout(timer);
+  }, [moveCount, showScrollCue]);
+
+  // Hide cue if user scrolls
+  const handleScroll = () => {
+    if (showScrollCue) setShowScrollCue(false);
+  };
 
   const goNext = () => {
     if (swiperRef.current && swiperRef.current.swiper) {
@@ -99,7 +120,11 @@ export default function FavoriteDestinations() {
         </div>
 
         {/* Mobile: horizontally scrollable cards */}
-        <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-2 md:hidden hide-scrollbar">
+        <div
+          ref={scrollRef}
+          className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-2 md:hidden hide-scrollbar"
+          onScroll={handleScroll}
+        >
           {destinations.map((dest, idx) => (
             <div
               key={dest.name}
@@ -122,6 +147,17 @@ export default function FavoriteDestinations() {
               </div>
             </div>
           ))}
+        </div>
+        {/* Mobile: scroll cue below cards */}
+        <div className="md:hidden flex flex-col items-center mt-2">
+          <div className="flex items-center gap-1">
+            <span className="h-1 w-8 rounded-full bg-gray-300" />
+            <svg className={`w-5 h-5 text-gray-400${showScrollCue ? ' animate-move-right' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+            <span className="h-1 w-8 rounded-full bg-gray-300" />
+          </div>
+          <span className="text-xs text-gray-400 mt-1">Scroll horizontally</span>
         </div>
 
         {/* Desktop: carousel */}
