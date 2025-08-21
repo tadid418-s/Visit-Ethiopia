@@ -1,10 +1,11 @@
 'use client';
 
+
 import React from 'react';
 import Image from 'next/image';
+import { Button } from '@/components/ui/button';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
-import { Button } from '@/components/ui/button';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -73,17 +74,15 @@ export default function FavoriteDestinations() {
         goNext();
       }
     };
-
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
   return (
     <section id="destinations" className="py-12 bg-gray-100 min-h-screen flex items-center">
-      <div className="max-w-7xl mx-auto px-4 text-left pt-20">
+      <div className="max-w-7xl mx-auto px-4 text-left pt-20 w-full">
         {/* Top Label and Headline Row */}
         <div className="grid md:grid-cols-4 gap-6 mb-16">
-          {/* Headline (takes 3 columns on larger screens) */}
           <div className="md:col-span-3">
             <h2 className="text-2xl md:text-4xl font-extrabold text-red-700 mb-2">
               Escape to Our Favorite Destination
@@ -92,15 +91,41 @@ export default function FavoriteDestinations() {
               Discover Ethiopia&apos;s most popular vacation spots, from Axum, Danakil, Lalibela, Simien and many more.
             </p>
           </div>
-
-          {/* Small Label on the far right */}
           <div className="md:col-span-1">
             <p className="text-xs font-medium tracking-wide text-gray-700 uppercase">
               VISIT ETHIOPIA
             </p>
           </div>
         </div>
-        <div className="relative">
+
+        {/* Mobile: horizontally scrollable cards */}
+        <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-2 md:hidden hide-scrollbar">
+          {destinations.map((dest, idx) => (
+            <div
+              key={dest.name}
+              className="snap-start min-w-[85vw] max-w-xs bg-white rounded-xl shadow-md overflow-hidden flex-shrink-0"
+              tabIndex={0}
+              aria-label={dest.name}
+            >
+              <Image
+                src={dest.image}
+                alt={dest.name}
+                width={600}
+                height={400}
+                className="w-full h-56 object-cover"
+              />
+              <div className="p-4">
+                <h3 className="text-lg font-bold text-gray-900 mb-1">{dest.name}</h3>
+                <p className="text-xs text-gray-500 mb-1">{dest.region}</p>
+                <p className="text-sm text-gray-700 mb-3">{dest.description}</p>
+                <Button className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold transition-colors" size="sm">More Info</Button>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Desktop: carousel */}
+        <div className="relative hidden md:block">
           <Swiper
             ref={swiperRef}
             slidesPerView={4}
@@ -115,17 +140,9 @@ export default function FavoriteDestinations() {
             modules={[Navigation]}
             className="mySwiper"
             breakpoints={{
-              320: {
-                slidesPerView: 1,
-                spaceBetween: 8,
-              },
-              640: {
-                slidesPerView: 1,
-                spaceBetween: 10,
-              },
               768: {
                 slidesPerView: 2,
-                spaceBetween: 15,
+                spaceBetween: 18,
               },
               1024: {
                 slidesPerView: 3,
@@ -137,38 +154,38 @@ export default function FavoriteDestinations() {
               },
             }}
           >
-                         {destinations.map((dest, index) => (
-               <SwiperSlide key={index}>
-                 <div className="relative w-full">
-                   <div className="bg-white rounded-xl overflow-hidden shadow-md">
-                                           <Image
-                        src={dest.image}
-                        alt={dest.name}
-                        width={300}
-                        height={500}
-                        className="w-full h-80 object-cover"
-                      />
-                   </div>
-                   {/* Transparent overlay with destination info */}
-                   <div className="absolute bottom-2 left-2 right-2 bg-black/40 backdrop-blur-sm rounded-lg p-3 border border-white/20">
-                     <div className="flex justify-between items-start">
-                       <div className="text-white">
-                         <p className="text-sm font-semibold">{dest.name}</p>
-                         <p className="text-xs text-white/80">{dest.region}</p>
-                         <p className="text-xs text-white/90 mt-1">{dest.description}</p>
-                       </div>
-                       <Button
-                         className="text-xs text-white bg-black/20 hover:bg-black/40 transition-colors border border-white/20"
-                         size="sm"
-                         variant="secondary"
-                       >
-                         More Info
-                       </Button>
-                     </div>
-                   </div>
-                 </div>
-               </SwiperSlide>
-             ))}
+            {destinations.map((dest, index) => (
+              <SwiperSlide key={index}>
+                <div className="relative w-full px-1 sm:px-2">
+                  <div className="bg-white rounded-xl overflow-hidden shadow-md">
+                    <Image
+                      src={dest.image}
+                      alt={dest.name}
+                      width={300}
+                      height={500}
+                      className="w-full h-64 sm:h-80 object-cover"
+                    />
+                  </div>
+                  {/* Transparent overlay with destination info */}
+                  <div className="absolute bottom-2 left-2 right-2 bg-black/40 backdrop-blur-sm rounded-lg p-3 border border-white/20">
+                    <div className="flex justify-between items-start">
+                      <div className="text-white">
+                        <p className="text-sm font-semibold">{dest.name}</p>
+                        <p className="text-xs text-white/80">{dest.region}</p>
+                        <p className="text-xs text-white/90 mt-1">{dest.description}</p>
+                      </div>
+                      <Button
+                        className="text-xs text-white bg-black/20 hover:bg-black/40 transition-colors border border-white/20"
+                        size="sm"
+                        variant="secondary"
+                      >
+                        More Info
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              </SwiperSlide>
+            ))}
           </Swiper>
           {/* Custom Navigation Arrows */}
           <button 
@@ -185,7 +202,6 @@ export default function FavoriteDestinations() {
           >
             <ChevronRight className="w-5 h-5 md:w-6 md:h-6 text-gray-700" />
           </button>
-          
           {/* Gradient overlays for fade effect on sides - matching background color */}
           <div className="absolute inset-y-0 left-0 w-8 md:w-16 bg-gradient-to-r from-gray-100 to-transparent z-10 pointer-events-none"></div>
           <div className="absolute inset-y-0 right-0 w-8 md:w-16 bg-gradient-to-l from-gray-100 to-transparent z-10 pointer-events-none"></div>
