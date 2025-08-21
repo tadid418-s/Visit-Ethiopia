@@ -102,7 +102,7 @@ export default function Component() {
                       <NavigationMenuItem key={index} className="w-full">
                         <NavigationMenuLink
                           href={link.href}
-                          className="flex-row items-center gap-1.5 py-1 text-sm transition-colors text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded px-2 w-full text-left"
+                          className="flex-row items-center gap-1.5 py-1 text-sm transition-colors text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded px-2 w-full text-left justify-start"
                           active={link.active}
                           onClick={(e) => {
                             e.preventDefault();
@@ -125,7 +125,7 @@ export default function Component() {
                     <Popover>
                       <PopoverTrigger asChild>
                         <NavigationMenuLink
-                          className="flex-row items-center gap-1.5 py-1 text-sm transition-colors cursor-pointer w-full text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded px-2 text-left"
+                          className="flex-row items-center gap-1.5 py-1 text-sm transition-colors cursor-pointer w-full text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded px-2 text-left justify-start"
                         >
                           <Compass
                             size={14}
@@ -161,7 +161,7 @@ export default function Component() {
                   {/* Search Button for Mobile */}
                   <NavigationMenuItem className="w-full">
                     <NavigationMenuLink
-                      className="flex-row items-center gap-1.5 py-1 text-sm transition-colors cursor-pointer w-full text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded px-2 text-left"
+                      className="flex-row items-center gap-1.5 py-1 text-sm transition-colors cursor-pointer w-full text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded px-2 text-left justify-start"
                       onClick={() => {
                         // Open search dialog
                         const searchButton = document.querySelector('[data-search-trigger]') as HTMLButtonElement;
