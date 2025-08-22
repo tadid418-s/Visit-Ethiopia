@@ -44,7 +44,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${amhara.variable}`}>
+  <body className={amhara.variable}>
         <Navbar />
         <main className="relative overflow-hidden">
           {children}
