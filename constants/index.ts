@@ -31,6 +31,14 @@ export const FEATURES = [
   }
 ];
 
+// PEOPLE AVATAR IMAGE URLS
+export const PEOPLE_URL = [
+  '/person-1.png',
+  '/person-2.png',
+  '/person-3.png',
+  '/person-4.png',
+];
+
 // FOOTER SECTION
 export const FOOTER_LINKS = [
   {
