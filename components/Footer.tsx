@@ -88,9 +88,17 @@ const Footer = () => {
               href="https://github.com/tadid418-s" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-gray-400 hover:text-white text-sm transition-colors underline"
+              className="text-gray-400 hover:text-white text-sm transition-colors"
+              tabIndex={0}
+              aria-label="Built by Tadiyos (opens in new tab)"
+              onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                window.open('https://github.com/tadid418-s', '_blank', 'noopener,noreferrer');
+              }
+              }}
             >
-              Built by Tadiyos
+              Built by :
+              <span className="underline ml-1"> Tadiyos</span>
             </Link>
           </div>
         </div>
