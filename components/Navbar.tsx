@@ -281,8 +281,10 @@ export default function Component() {
             <SearchBar isScrolled={isScrolled} />
           </div>
           {/* Language selector */}
-          <div className="flex items-center">
-            <LanguageSelector isScrolled={isScrolled} />
+          <div className="flex items-center min-w-[120px] justify-end relative">
+            <div className="w-full flex justify-end">
+              <LanguageSelector isScrolled={isScrolled} />
+            </div>
           </div>
         </div>
       </div>
