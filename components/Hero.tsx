@@ -1,4 +1,28 @@
+"use client"
+
+import { useEffect, useState } from "react"
+
 const Hero = () => {
+  const [showScrollCue, setShowScrollCue] = useState(true)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 20) setShowScrollCue(false)
+    }
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  const handleScrollPromptClick = () => {
+    const target = document.querySelector('#about')
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' })
+    } else {
+      window.scrollBy({ top: window.innerHeight * 0.8, behavior: 'smooth' })
+    }
+    setShowScrollCue(false)
+  }
+
   return (
     <section 
       className="relative min-h-screen w-full bg-cover bg-center bg-no-repeat flex items-center"
@@ -24,6 +48,28 @@ const Hero = () => {
           </div>
         </div>
       </div>
+
+      {/* Scroll cue - lower left (rotated label + vertical bar with bouncing dot) */}
+      {showScrollCue && (
+        <div className="absolute left-3 bottom-8 z-20 md:left-6 md:bottom-12 flex items-center gap-3">
+          <button
+            onClick={handleScrollPromptClick}
+            aria-label="Scroll down"
+            className="flex flex-col items-center gap-2 focus:outline-none"
+            tabIndex={0}
+          >
+            <div className="hidden md:flex flex-col items-center gap-0 select-none transform translate-x-1" aria-hidden>
+              {"SCROLL".split("").map((ch, i) => (
+                <span key={i} className="text-xs uppercase tracking-[0.4em] text-white/80 leading-[1]">{ch}</span>
+              ))}
+            </div>
+
+            <span className="relative flex items-center justify-center">
+              <span className="elastic-bar text-white/20 animate-elasticus" aria-hidden />
+            </span>
+          </button>
+        </div>
+      )}
     </section>
   )
 }
