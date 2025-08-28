@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Visit Ethiopia - Discover Ancient Wonders & Natural Beauty',
     description: 'Explore Ethiopia\'s rich cultural heritage, UNESCO World Heritage sites, stunning landscapes, and authentic experiences. From the rock-hewn churches of Lalibela to the Danakil Depression, discover the cradle of humanity.',
-    url: 'https://visit-ethiopia.com/',
+    url: 'https://visit-ethiopia-rosy.vercel.app/',
     siteName: 'Visit Ethiopia',
     images: [
       {
