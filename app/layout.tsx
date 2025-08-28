@@ -26,14 +26,20 @@ export const metadata: Metadata = {
     siteName: 'Visit Ethiopia',
     images: [
       {
-        url: '/lalibela.jpg',
+        url: '/Ethiopia_Background.jpg',
         width: 1200,
         height: 630,
-        alt: 'Rock-hewn churches of Lalibela, Ethiopia',
+        alt: 'Explore Ethiopia - hero image',
       },
     ],
     locale: 'en_US',
     type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Visit Ethiopia - Discover Ancient Wonders & Natural Beauty',
+    description: 'Explore Ethiopia\'s rich cultural heritage, UNESCO World Heritage sites, stunning landscapes, and authentic experiences.',
+    images: ['/Ethiopia_Background.jpg'],
   },
 };
 
@@ -45,6 +51,20 @@ export default function RootLayout({
   return (
     <html lang="en">
   <body className={amhara.variable}>
+        <head>
+          <meta property="og:title" content="Visit Ethiopia - Discover Ancient Wonders & Natural Beauty" />
+          <meta property="og:description" content="Explore Ethiopia's rich cultural heritage, UNESCO World Heritage sites, stunning landscapes, and authentic experiences." />
+          <meta property="og:type" content="website" />
+          <meta property="og:image" content="/Ethiopia_Background.jpg" />
+          <meta property="og:image:alt" content="Explore Ethiopia - hero image" />
+          <meta property="og:image:width" content="1200" />
+          <meta property="og:image:height" content="630" />
+
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:title" content="Visit Ethiopia - Discover Ancient Wonders & Natural Beauty" />
+          <meta name="twitter:description" content="Explore Ethiopia's rich cultural heritage, UNESCO World Heritage sites, stunning landscapes, and authentic experiences." />
+          <meta name="twitter:image" content="/Ethiopia_Background.jpg" />
+        </head>
         <Navbar />
         <main className="relative overflow-hidden">
           {children}
