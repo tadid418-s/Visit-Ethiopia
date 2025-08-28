@@ -36,6 +36,7 @@ const eventsOptions = [
 
 export default function Component() {
   const [isScrolled, setIsScrolled] = useState(false)
+  const [is404, setIs404] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -44,15 +45,24 @@ export default function Component() {
     }
 
     window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+    // check initial body class
+    setIs404(document.body.classList.contains('nav-404'))
+
+    const onMounted = () => setIs404(true)
+    const onUnmounted = () => setIs404(false)
+    window.addEventListener('notfound:mounted', onMounted)
+    window.addEventListener('notfound:unmounted', onUnmounted)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('notfound:mounted', onMounted)
+      window.removeEventListener('notfound:unmounted', onUnmounted)
+    }
   }, [])
 
   return (
     <header 
       className={`fixed top-0 left-0 right-0 z-50 px-4 md:px-6 transition-all duration-300 ease-in-out ${
-        isScrolled 
-          ? 'bg-white shadow-sm' 
-          : ''
+        is404 ? 'bg-black text-white' : (isScrolled ? 'bg-white shadow-sm' : '')
       }`}
     >
       <div className="flex h-14 items-center justify-between gap-3">
@@ -270,7 +280,7 @@ export default function Component() {
         {/* Middle side: Logo */}
         <div className="flex items-center">
           <a href="#" className="transition-opacity hover:opacity-90">
-            <Logo isScrolled={isScrolled} />
+            <Logo isScrolled={isScrolled} is404={is404} />
           </a>
       </div>
 
