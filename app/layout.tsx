@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: 'Visit Ethiopia - Discover Ancient Wonders & Natural Beauty',
   description: 'Explore Ethiopia\'s rich cultural heritage, UNESCO World Heritage sites, stunning landscapes, and authentic experiences. From the rock-hewn churches of Lalibela to the Danakil Depression, discover the cradle of humanity.',
   authors: [
-    { name: 'Visit Ethiopia', url: 'https://visit-ethiopia.com/' }
+    { name: 'Visit Ethiopia', url: 'https://visit-ethiopia-rosy.vercel.app/' }
   ],
   keywords: [
     'Ethiopia', 'Travel', 'Tourism', 'Lalibela', 'Axum', 'Simien Mountains', 'Danakil Depression', 'UNESCO World Heritage', 'Ethiopian Culture', 'Addis Ababa', 'Historical Sites', 'Natural Wonders', 'African Tourism', 'Cultural Heritage', 'Rock Churches'

@@ -58,12 +58,12 @@ export default function UNESCOHeritages() {
   return (
     <section className="py-12 bg-[#fdfaf7] relative">
       <div className="max-w-7xl mx-auto px-4">
-        <p className="text-sm text-gray-500 mb-8 uppercase text-center">UNESCO Heritages</p>
-        <ul className="space-y-4 max-w-2xl mx-auto">
+  <p className="text-sm text-gray-500 mb-8 uppercase text-left">UNESCO Heritages</p>
+  <ul className="space-y-4 w-full">
           {sites.map((site, index) => (
             <li
               key={index}
-              className={`text-2xl md:text-3xl font-bold uppercase cursor-pointer transition-colors text-center ${
+              className={`text-2xl md:text-3xl font-bold uppercase cursor-pointer transition-colors text-left ${
                 activeIndex === index ? 'text-red-800' : 'text-red-300'
               }`}
               onClick={() => setActiveIndex(index)}
@@ -106,15 +106,15 @@ export default function UNESCOHeritages() {
                   {sites[activeIndex].name}
                 </h3>
                 <div className="flex justify-between items-center bg-white/30 backdrop-blur-sm rounded-xl px-4 py-2 mb-3">
-                  <div className="flex flex-col items-center">
+                  <div className="flex flex-col items-start">
                     <span className="text-yellow-500 text-lg">★</span>
                     <span className="text-xs text-gray-900 font-medium">World Heritage</span>
                   </div>
-                  <div className="flex flex-col items-center">
+                  <div className="flex flex-col items-start">
                     <span className="text-green-600 text-lg">🌍</span>
                     <span className="text-xs text-gray-900 font-medium">Ethiopia</span>
                   </div>
-                  <div className="flex flex-col items-center">
+                  <div className="flex flex-col items-start">
                     <span className="text-blue-500 text-lg">🏞️</span>
                     <span className="text-xs text-gray-900 font-medium">Since 1978</span>
                   </div>
