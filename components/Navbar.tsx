@@ -60,11 +60,7 @@ export default function Component() {
   }, [])
 
   return (
-    <header 
-      className={`fixed top-0 left-0 right-0 z-50 px-4 md:px-6 transition-all duration-300 ease-in-out ${
-        is404 ? 'bg-black text-white' : (isScrolled ? 'bg-white shadow-sm' : '')
-      }`}
-    >
+  <header className="fixed top-0 left-0 right-0 z-50 px-4 md:px-6 bg-black text-white">
       <div className="flex h-14 items-center justify-between gap-3">
         {/* Left side */}
         <div className="flex flex-1 items-center gap-2">
@@ -206,11 +202,7 @@ export default function Component() {
                     <NavigationMenuLink
                       active={link.active}
                       href={link.href}
-                      className={`flex-row items-center gap-1.5 py-1 px-2 rounded-md text-sm transition-all duration-200 ${
-                        isScrolled 
-                          ? 'text-foreground hover:text-primary hover:bg-accent/50' 
-                          : 'text-white hover:text-white hover:bg-white/10'
-                      } ${link.active ? (isScrolled ? 'bg-accent/30 text-primary' : 'bg-white/15 text-white') : ''}`}
+                      className={`flex-row items-center gap-1.5 py-1 px-2 rounded-md text-sm transition-all duration-200 text-white hover:text-white hover:bg-white/10 ${link.active ? 'bg-white/15 text-white' : ''}`}
                       onClick={(e) => {
                         e.preventDefault();
                         document.querySelector(link.href)?.scrollIntoView({ behavior: 'smooth' });
@@ -218,7 +210,7 @@ export default function Component() {
                     >
                       <Icon
                         size={14}
-                        className={`transition-colors ${isScrolled ? "text-muted-foreground/80" : "text-white/80"}`}
+                        className={`transition-colors text-white/80`}
                         aria-hidden="true"
                       />
                       <span>{link.label}</span>
@@ -232,15 +224,11 @@ export default function Component() {
                 <Popover>
                   <PopoverTrigger asChild>
                     <NavigationMenuLink
-                      className={`flex-row items-center gap-1.5 py-1 px-2 rounded-md text-sm transition-all duration-200 cursor-pointer ${
-                        isScrolled 
-                          ? 'text-foreground hover:text-primary hover:bg-accent/50' 
-                          : 'text-white hover:text-white hover:bg-white/10'
-                      }`}
+                      className={`flex-row items-center gap-1.5 py-1 px-2 rounded-md text-sm transition-all duration-200 cursor-pointer text-white hover:text-white hover:bg-white/10`}
                     >
                       <Compass
                         size={14}
-                        className={`transition-colors ${isScrolled ? "text-muted-foreground/80" : "text-white/80"}`}
+                        className={`transition-colors text-white/80`}
                         aria-hidden="true"
                       />
                       <span>Discover</span>
