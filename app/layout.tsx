@@ -66,7 +66,7 @@ export default function RootLayout({
           <meta name="twitter:image" content="/Ethiopia_Background.jpg" />
         </head>
         <Navbar />
-        <main className="relative overflow-hidden">
+  <main className="relative overflow-hidden pt-16">
           {children}
         </main>
         <Footer />

@@ -53,7 +53,7 @@ export default function NewsPage() {
   const side = filtered.slice(1)
 
   return (
-    <section className="py-12 px-4 md:px-8 lg:px-12 max-w-7xl mx-auto">
+  <section className="py-12 px-4 md:px-8 lg:px-12 max-w-7xl mx-auto mt-6 md:mt-8">
       <div className="mb-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <h1 className="font-serif text-3xl md:text-4xl">News & Stories</h1>
         <div className="w-full md:w-1/2 lg:w-1/3 flex gap-3">
