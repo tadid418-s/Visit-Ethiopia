@@ -30,7 +30,7 @@ const navigationLinks = [
 const eventsOptions = [
   { href: "#upcoming-events", label: "Upcoming Events", icon: Calendar },
   { href: "#blogs", label: "Blogs", icon: FileText },
-  { href: "#news", label: "News", icon: Newspaper },
+  { href: "/news", label: "News", icon: Newspaper },
   { href: "#announcements", label: "Announcements", icon: Megaphone },
 ]
 
@@ -155,7 +155,11 @@ export default function Component() {
                                 className="flex items-center gap-2 w-full px-3 py-2 text-sm text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors text-left"
                                 onClick={(e) => {
                                   e.preventDefault();
-                                  document.querySelector(option.href)?.scrollIntoView({ behavior: 'smooth' });
+                                  if (option.href.startsWith('#')) {
+                                    document.querySelector(option.href)?.scrollIntoView({ behavior: 'smooth' });
+                                  } else {
+                                    window.location.href = option.href;
+                                  }
                                 }}
                               >
                                 <Icon size={14} className="text-gray-500" />
@@ -261,7 +265,11 @@ export default function Component() {
                             className="flex items-center gap-2 w-full px-3 py-2 text-sm text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors focus:outline-none"
                             onClick={(e) => {
                               e.preventDefault();
-                              document.querySelector(option.href)?.scrollIntoView({ behavior: 'smooth' });
+                              if (option.href.startsWith('#')) {
+                                document.querySelector(option.href)?.scrollIntoView({ behavior: 'smooth' });
+                              } else {
+                                window.location.href = option.href;
+                              }
                             }}
                           >
                             <Icon size={14} className="text-gray-500" />
