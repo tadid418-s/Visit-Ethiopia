@@ -53,44 +53,115 @@ export default function NewsPage() {
   const side = filtered.slice(1)
 
   return (
-  <section className="py-12 px-4 md:px-8 lg:px-12 max-w-7xl mx-auto mt-6 md:mt-8">
-      <div className="mb-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-        <h1 className="font-serif text-3xl md:text-4xl">News & Stories</h1>
-        <div className="w-full md:w-1/2 lg:w-1/3 flex gap-3">
-          <div className="w-1/2">
-            <Select onValueChange={(v) => setCategory(v || 'All')} defaultValue="All">
-              <SelectTrigger>
-                <SelectValue>All</SelectValue>
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="All">All</SelectItem>
-                <SelectItem value="Culture">Culture</SelectItem>
-                <SelectItem value="Nature">Nature</SelectItem>
-                <SelectItem value="History">History</SelectItem>
-                <SelectItem value="Travel">Travel</SelectItem>
-              </SelectContent>
-            </Select>
+    <section className="news-paper paper-background py-6 px-4 md:px-8 lg:px-12 max-w-7xl mx-auto mt-6 md:mt-8">
+      {/* Masthead */}
+      <div className="newspaper-masthead mb-6">
+        <h1 className="masthead-title">The Visit Ethiopia Journal</h1>
+        <div className="masthead-sub">VOL. 1 • NO. 1 — {new Date().toLocaleDateString()}</div>
+        <div className="theme-pills">
+          {['All','Culture','Nature','History','Travel'].map(t => (
+            <button 
+              key={t}
+              className={`theme-pill ${category === t ? 'active' : ''}`}
+              onClick={() => setCategory(t)}
+            >{t}</button>
+          ))}
+        </div>
+      </div>
+
+      {/* Controls */}
+      <div className="mb-6">
+        <div className="top-utility">
+          <div className="hidden md:flex gap-6">
+            <span>BOOKING</span>
+            <span>GAVERKORT</span>
+            <span>MENY</span>
+            <span>EVENT</span>
+            <span>TAKEAWAY</span>
+            <span>UTLEVERING</span>
+            <span>AKTUELT</span>
+            <span>KONTAKT</span>
+            <span>ENGLISH</span>
           </div>
-          <div className="flex-1">
-            <Input placeholder="Search news, places, topics..." value={query} onChange={(e) => setQuery(e.target.value)} />
+
+          <div className="mt-4 md:mt-2 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+            <div className="text-sm text-gray-800">Independent • Culture • Nature • Travel</div>
+            <div className="w-full md:w-1/3 flex gap-3">
+              <div className="w-1/2">
+                <Select onValueChange={(v) => setCategory(v || 'All')} defaultValue="All">
+                  <SelectTrigger>
+                    <SelectValue>All</SelectValue>
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="All">All</SelectItem>
+                    <SelectItem value="Culture">Culture</SelectItem>
+                    <SelectItem value="Nature">Nature</SelectItem>
+                    <SelectItem value="History">History</SelectItem>
+                    <SelectItem value="Travel">Travel</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="flex-1">
+                <Input placeholder="Search news, places, topics..." value={query} onChange={(e) => setQuery(e.target.value)} />
+              </div>
+            </div>
+          </div>
+
+          {/* theme pills (mobile-friendly position) */}
+          <div className="mt-4 flex justify-center">
+            <div className="theme-pills">
+              {['All','Culture','Nature','History','Travel'].map(t => (
+                <button 
+                  key={t}
+                  className={`theme-pill ${category === t ? 'active' : ''}`}
+                  onClick={() => setCategory(t)}
+                >{t}</button>
+              ))}
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div className="lg:col-span-2">
-          <FeaturedArticle article={featured} />
-        </div>
+      {/* Main front-page grid: left teaser, center lead, right image */}
+      <div>
+        <div className="front-headline">{featured.title.toUpperCase()}</div>
+        <div className="front-grid">
+          {/* left teaser */}
+          <div>
+            <div className="article-clipping mb-6">
+              <img src={SAMPLE[1].image} alt="teaser" className="w-full h-32 object-cover mb-3" />
+              <h3 className="font-serif text-lg">{SAMPLE[1].title}</h3>
+              <p className="text-sm text-gray-700 mt-2">{SAMPLE[1].excerpt}</p>
+              <div className="mt-3 text-xs text-gray-600">{SAMPLE[1].date} • {SAMPLE[1].category}</div>
+              <div className="mt-3 border-t pt-3 text-sm"><a href="#" className="underline">Book Bord</a></div>
+            </div>
 
-        <aside className="space-y-4">
-          {side.length ? (
-            side.map(a => (
-              <ArticleCard key={a.id} article={a} />
-            ))
-          ) : (
-            SAMPLE.slice(1).map(a => <ArticleCard key={a.id} article={a} />)
-          )}
-        </aside>
+            <div className="clip-list">
+              {SAMPLE.slice(2).map(s => (
+                <div key={s.id} className="article-clipping mb-4">
+                  <h3>{s.title}</h3>
+                  <div className="text-xs text-gray-600">{s.date} • {s.category}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* center lead article */}
+          <main className="lead-article">
+            <div className="lead-eyebrow">FEATURE</div>
+            <h2 className="lead-title">{featured.title}</h2>
+            <div className="article-byline">By Staff • {featured.date}</div>
+            <div className="article-body mt-4">
+              <p>{featured.excerpt} {featured.excerpt} {featured.excerpt}</p>
+              <p className="mt-4">Additional long-form content goes here to mimic the newspaper column structure. This will flow into two columns on medium screens and keep a classic serif reading experience.</p>
+            </div>
+          </main>
+
+          {/* right large image */}
+          <aside>
+            <img src={featured.image} alt="feature" className="w-full h-full object-cover border border-gray-200" />
+          </aside>
+        </div>
       </div>
     </section>
   )
